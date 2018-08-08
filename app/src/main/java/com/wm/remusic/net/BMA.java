@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 public class BMA {
 
     public static final String FORMATE = "json";
-    public static final String BASE = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=" + FORMATE;
+    public static final String BASE = "http://192.168.1.15:3000";
 
     /**
      * 轮播音乐封面
@@ -590,7 +590,7 @@ public class BMA {
          */
         public static String hotWord() {
             StringBuffer sb = new StringBuffer(BASE);
-            sb.append("&method=").append("baidu.ting.search.hot");
+            sb.append("/search/hot");
             return sb.toString();
         }
 

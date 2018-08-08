@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.wm.remusic.R;
 import com.wm.remusic.adapter.RecentSearchAdapter;
 import com.wm.remusic.fragment.AttachFragment;
@@ -76,9 +77,12 @@ public class SearchHotWordFragment extends AttachFragment implements View.OnClic
 
 
                 try {
-                    JsonArray jsonArray = HttpUtil.getResposeJsonObject(BMA.Search.hotWord(), mContext, isFromCache).get("result").getAsJsonArray();
-                    for (int i = 0; i < 10; i++) {
-                        texts[i] = jsonArray.get(i).getAsJsonObject().get("word").getAsString();
+                    JsonArray ja = HttpUtil.getResposeJsonObject(BMA.Search.hotWord(), mContext, isFromCache)
+                            .get("result").getAsJsonObject()
+                            .get("hots").getAsJsonArray();
+
+                    for (int i = 0; i < ja.size(); i++) {
+                        texts[i] = ja.get(i).getAsJsonObject().get("first").getAsString();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
